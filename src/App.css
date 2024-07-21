@@ -1,3 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: whitesmoke;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  margin-bottom: 60px;
+}
+
 .App {
   display: flex;
   height: 100vh;
@@ -5,6 +20,11 @@
 }
 
 .books-section {
+  background-image: url("../public/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
   flex: 2;
   overflow-y: auto;
   padding: 20px;
@@ -32,7 +52,7 @@
   position: relative;
   border-radius: 8px;
   transition: transform 0.2s, box-shadow 0.2s;
-  height: 350px;
+  height: 370px;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
@@ -82,7 +102,7 @@
   background: #e74c3c;
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 5px;
   width: 25px;
   height: 25px;
   display: flex;
@@ -127,4 +147,109 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #2980b9;
+}
+
+.account-background {
+  background-image: url("../public/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.account-login-container, .account-register-container {
+  max-width: none;
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.account-login-container form, .account-register-container form {
+  padding: 20px;
+}
+
+.account-login-container form input:not([type="checkbox"]), .account-register-container form input:not([type="checkbox"]) {
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 17px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.account-login-container form input:not([type="checkbox"]):focus, .account-register-container form input:not([type="checkbox"]):focus {
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 17px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  outline: none;
+}
+
+.account-login-container form input[type="submit"], .account-register-container form input[type="submit"] {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.account-login-container h1, .account-register-container h1 {
+  margin: 20px 20px 0 20px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.account-login-container form p, .account-register-container form p {
+  margin: 0 0 -5px 0;
+}
+
+.account-login-agreement input[type="checkbox"], .account-register-agreement input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+}
+
+.account-login-agreement label, .account-register-agreement label {
+  margin-left: 5px;
+}
+
+.account-login-footer, .account-register-footer {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.account-login-register, .account-register-login {
+  color: #007BFF;
+  cursor: pointer;
+}
+
+.account-login-register:hover, .account-register-login:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.error-message {
+  max-width: none;
+  width: 400px;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgb(227, 38, 54);
+  color: white;
+  border-radius: 8px;
 }

@@ -37,28 +37,48 @@ const BookForm = ({ bookToEdit, onFormSubmit }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (book._id) {
-      await axios.put(`http://localhost:5000/api/v1/books/${book._id}`, {
-        ...book,
-        publishDate: new Date(book.publishDate).toISOString(),
+    try {
+      e.preventDefault();
+      
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      if (book._id) {
+        await axios.patch(`http://localhost:5000/api/v1/books/${book._id}`, book, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          params: {
+            publishDate: new Date(book.publishDate).toISOString()
+          }
+        });
+      } else {
+        await axios.post('http://localhost:5000/api/v1/books', book, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          params: {
+            publishDate: new Date(book.publishDate).toISOString()
+          }
+        });
+      }
+      onFormSubmit();
+      setBook({
+        title: '',
+        author: '',
+        price: '',
+        discount: '',
+        page: '',
+        publishDate: '',
+        imageLink: '',
       });
-    } else {
-      await axios.post('http://localhost:5000/api/v1/books', {
-        ...book,
-        publishDate: new Date(book.publishDate).toISOString(),
-      });
+    } catch (error) {
+      console.error(error);
+      // localStorage.removeItem('token');
+      // window.location.href = '/login';
     }
-    onFormSubmit();
-    setBook({
-      title: '',
-      author: '',
-      price: '',
-      discount: '',
-      page: '',
-      publishDate: '',
-      imageLink: '',
-    });
   };
 
   return (

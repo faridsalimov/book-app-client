@@ -5,8 +5,24 @@ const BookCard = ({ book, onDelete, onClick }) => {
   const handleDelete = async (e) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this book?')) {
-      await axios.delete(`http://localhost:5000/api/v1/books/${book._id}`);
-      onDelete(book._id);
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token found');
+        }
+
+        await axios.delete(`http://localhost:5000/api/v1/books/${book._id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        onDelete(book._id);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      }
     }
   };
 
